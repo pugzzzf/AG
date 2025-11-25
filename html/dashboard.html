@@ -2,17 +2,21 @@
 
 <html>
     <head>
-        <link href="../css/dashboard.css" rel="stylesheet">
+        <script src="https://cdn.plot.ly/plotly-3.3.0.min.js"></script>
+        <link href="../css/sidebar.css" rel="stylesheet">
         <title>AG Dashboard</title>
     </head>
     <body>
         <div id="sidebar" class="sidenav">
-            <a href="#">Dashboard</a>
+            <a href="#" class="cur">Dashboard</a>
             <a href="#">Sessions</a>
             <a href="login.html">Log Out</a>
         </div>
-        <div class="main" style="text-align: center;">
-            No Live Session.
+        <div class="main">
+            <div>No Live Session.</div>
+            <div id="test">
+                <script src="../script/plot.js"></script>
+            </div>
         </div>
     </body>
 </html>
