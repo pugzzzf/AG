@@ -1,31 +1,30 @@
-.sidenav
-{
-    height: 100%;
-    width: 200px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lato:wght@400&display=swap");
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
-.sidenav a
-{
-    padding: 6px 6px 6px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  font-family: "Montserrat", sans-serif;
 }
 
-.sidenav a:hover
-{
-    color: #fff;
+.sidenav a:hover {
+  color: #fff;
 }
 
-.main
-{
-    margin-left: 200px;
+.main {
+  margin-left: 200px;
 }
