@@ -62,3 +62,17 @@
 #menu-btn.shifted {
   left: 215px; /* poquito más que el ancho del sidebar */
 }
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar-footer img {
+  width: 90px;
+  opacity: 0.9;
+  filter: brightness(0.95);
+}
