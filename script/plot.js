@@ -1,5 +1,3 @@
-let exp = "Math.sin(x)"
-
 var trace1 =
 {
     x: [1, 2, 3],
