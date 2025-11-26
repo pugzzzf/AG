@@ -10,6 +10,12 @@
   background-color: #111;
   overflow-x: hidden;
   padding-top: 20px;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sidenav.open {
+  transform: translateX(0);
 }
 
 .sidenav a {
@@ -26,5 +32,25 @@
 }
 
 .main {
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.main.shifted {
   margin-left: 200px;
+}
+
+#menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+  z-index: 2;
+  transition: left 0.3s ease;
+}
+
+#menu-btn.shifted {
+  left: 215px; /* poquito más que el ancho del sidebar */
 }
