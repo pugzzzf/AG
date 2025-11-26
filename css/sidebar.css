@@ -27,8 +27,16 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.sidenav a.cur {
+  background-color: #1a1a1a; /* un poquito más claro que el fondo */
+  border-left: 4px solid #f1f1f1;
+  padding-left: 28px; /* compensa el espacio que roba el borde */
+}
+
 .sidenav a:hover {
-  color: #fff;
+  background-color: #222;
+  color: #ffffff;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .main {
