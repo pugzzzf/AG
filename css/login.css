@@ -23,18 +23,23 @@ button {
   background-color: #397c7a;
   border-radius: 10px;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 12px 20px;
+  margin: 16px 0 4px;
   border: none;
   cursor: pointer;
   width: 100%;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 15px;
+  letter-spacing: 0.03em;
+  transition: background-color 0.2s ease, transform 0.1s ease,
+    box-shadow 0.2s ease;
 }
 
 button:hover {
-  opacity: 0.7;
+  background-color: #2f6866;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
 }
 
 .imgcontainer {
@@ -64,8 +69,10 @@ img.logo {
 }
 
 .label {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
+  margin-bottom: 4px;
+  display: inline-block;
 }
 
 html,
