@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BME280 en Tiempo Real</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 { 
+            color: #333; 
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* 🔥 BLOQUES HORIZONTALES 🔥 */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;   /* Permite acomodarse si la pantalla es pequeña */
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .block {
+            background: white;
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 120px;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Datos del BME280</h1>
+
+    <div class="container">
+
+        <div class="block">
+            <h3>Temperatura</h3>
+            <p class="value" id="tempDisplay">-- °C</p>
+            <input id="setTemp" type="number" step="0.1" placeholder="Setpoint °C">
+            <button onclick="sendSetpoint('set_temp', setTemp.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Humedad</h3>
+            <p class="value" id="humDisplay">-- %</p>
+            <input id="setHum" type="number" step="0.1" placeholder="Setpoint %">
+            <button onclick="sendSetpoint('set_hum', setHum.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Presión</h3>
+            <p class="value" id="presDisplay">-- hPa</p>
+            <input id="setPres" type="number" step="0.1" placeholder="Setpoint hPa">
+            <button onclick="sendSetpoint('set_pres', setPres.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Altitud</h3>
+            <p class="value" id="altDisplay">-- m</p>
+            <input id="setAlt" type="number" step="0.1" placeholder="Setpoint m">
+            <button onclick="sendSetpoint('set_alt', setAlt.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Particulas 0.3 um</h3>
+            <p class="value" id="par03Display">-- um</p>
+            <input id="setPar03" type="number" step="0.1" placeholder="Setpoint um">
+            <button onclick="sendSetpoint('set_particulas03', setPar03.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Particulas 0.5 um</h3>
+            <p class="value" id="par05Display">-- um</p>
+            <input id="setPar05" type="number" step="0.1" placeholder="Setpoint um">
+            <button onclick="sendSetpoint('set_particulas05', setPar05.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Particulas 1.0 um</h3>
+            <p class="value" id="par10Display">-- m</p>
+            <input id="setPar10" type="number" step="0.1" placeholder="Setpoint um">
+            <button onclick="sendSetpoint('set_particulas10', setPar10.value)">Enviar</button>
+        </div>
+
+<!--
+        <div class="block">
+            <h3>Particulas 2.5 um</h3>
+            <p class="value" id="altDisplay">-- m</p>
+            <input id="setAlt" type="number" step="0.1" placeholder="Setpoint m">
+            <button onclick="sendSetpoint('set_alt', setAlt.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Particulos 5.0 um</h3>
+            <p class="value" id="altDisplay">-- m</p>
+            <input id="setAlt" type="number" step="0.1" placeholder="Setpoint m">
+            <button onclick="sendSetpoint('set_alt', setAlt.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>Particulas 10.0 um</h3>
+            <p class="value" id="altDisplay">-- m</p>
+            <input id="setAlt" type="number" step="0.1" placeholder="Setpoint m">
+            <button onclick="sendSetpoint('set_alt', setAlt.value)">Enviar</button>
+        </div>v
+    -->
+        <div class="block">
+            <h3>CO2</h3>
+            <p class="value" id="co2Display">-- m</p>
+            <input id="setCO2" type="number" step="0.1" placeholder="Setpoint um">
+            <button onclick="sendSetpoint('set_CO2', setCO2.value)">Enviar</button>
+        </div>
+
+        <div class="block">
+            <h3>TVOC</h3>
+            <p class="value" id="tvocDisplay">-- m</p>
+            <input id="setTVOC" type="number" step="0.1" placeholder="Setpoint um">
+            <button onclick="sendSetpoint('set_TVOC', setTVOC.value)">Enviar</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Conexión WebSocket
+        var socket = new WebSocket('ws://localhost:1880/ws'); // Ajusta tu URL
+
+        socket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+
+            if (data.temperature !== undefined)
+                document.getElementById('tempDisplay').innerText = data.temperature.toFixed(2) + " °C";
+
+            if (data.humidity !== undefined)
+                document.getElementById('humDisplay').innerText = data.humidity.toFixed(2) + " %";
+
+            if (data.pressure !== undefined)
+                document.getElementById('presDisplay').innerText = data.pressure.toFixed(2) + " hPa";
+
+            if (data.altitude !== undefined)
+                document.getElementById('altDisplay').innerText = data.altitude.toFixed(2) + " m";
+
+            if (data.particulas03 !== undefined)
+                document.getElementById('par03Display').innerText = data.particulas03.toFixed(2) + " um";
+
+            if (data.particulas05 !== undefined)
+                document.getElementById('par05Display').innerText = data.particulas05.toFixed(2) + " um";
+
+            if (data.particulas10 !== undefined)
+                document.getElementById('par10Display').innerText = data.particulas10.toFixed(2) + " um";
+
+            if (data.eCO2 !== undefined)
+                document.getElementById('co2Display').innerText = data.eCO2.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
+
+            if(data.tTVOC !== undefined)
+                document.getElementById('tvocDisplay').innerText = data.tTVOC.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
+        };
+
+        function sendSetpoint(key, value) {
+            if (value === "" || isNaN(value)) {
+                alert("Introduce un valor válido");
+                return;
+            }
+
+            var msg = {};
+            msg[key] = parseFloat(value);
+
+            socket.send(JSON.stringify(msg));
+            console.log("Enviado:", msg);
+        }
+    </script>
+</body>
+</html>
