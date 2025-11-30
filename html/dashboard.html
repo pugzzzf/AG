@@ -7,8 +7,8 @@
     <title>Dashboard AG</title>
   </head>
   <body>
-    <span id="menu-btn">&#9776;</span>
-    <div id="sidebar" class="sidenav">
+    <div id="agsidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
       <a href="#" class="cur">Dashboard</a>
       <a href="#">Sessions</a>
       <a href="login.html">Log Out</a>
@@ -16,8 +16,9 @@
         <img src="../logo.png" alt="AG logo" />
       </div>
     </div>
-    <div class="main">
-      <div>No Live Session.</div>
+
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">☰</button>
       <div id="test">
         <script src="../script/plot.js"></script>
       </div>

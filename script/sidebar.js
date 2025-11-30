@@ -1,10 +1,11 @@
-const btn = document.getElementById("menu-btn");
-const sidebar = document.getElementById("sidebar");
-const main = document.querySelector(".main");
+function openNav()
+{
+    document.getElementById("agsidebar").style.width = "250px";
+    document.getElementById("main").style.width = "250px";
+}
 
-btn.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    main.classList.toggle("shifted");
-    btn.classList.toggle("shifted");
-});
-
+function closeNav()
+{
+    document.getElementById("agsidebar").style.width = "0px";
+    document.getElementById("main").style.width = "0px";
+}
