@@ -85,6 +85,13 @@ img.logo {
   display: inline-block;
 }
 
+#error
+{
+  color: #e04343;
+  font-size: 14px;
+  text-align: center;
+}
+
 html,
 body {
   height: 100%;

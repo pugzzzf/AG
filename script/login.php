@@ -25,8 +25,9 @@
         }
         else
         {
-            echo "<h2>Invalid username or password</h2>";
-        }
+            header("Location: ../html/login.html?error=1");
+            exit;
+        }    
     }
 ?>
 
