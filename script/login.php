@@ -1,4 +1,5 @@
 <?php
+    // login is not case sensitive.
     include(__DIR__ . "/db.php");
     if(isset($_POST['submit']))
     {
