@@ -1,4 +1,4 @@
-var socket = new WebSocket('ws://localhost:8080/html/dashboard.html');
+var socket = new WebSocket('ws://localhost:1880/ws');
 
 socket.onmessage = function(event) {
 var data = JSON.parse(event.data);
