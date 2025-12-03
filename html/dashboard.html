@@ -2,6 +2,7 @@
 
 <html>
   <head>
+    <meta charset="UTF-8">
     <script src="https://cdn.plot.ly/plotly-3.3.0.min.js"></script>
     <link href="../css/sidebar.css" rel="stylesheet">
     <link href="../css/dashboard.css" rel="stylesheet">
@@ -22,69 +23,110 @@
       <button class="openbtn" onclick="openNav()">☰</button>
       <h1>Datos del BME280</h1>
       <div class="container">
-
-          <div class="block">
+        <div class="section">
+          <h2 class="section-title">Ambiente</h2>
+          <div class="section-blocks">
+            <div class="block">
               <h3>Temperatura</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="tempStatus"></span>
+              </div>
               <p class="value" id="tempDisplay">-- °C</p>
               <input id="setTemp" type="number" step="0.1" placeholder="Setpoint °C">
-              <button onclick="sendSetpoint('set_temp', setTemp.value)">Enviar</button>
-          </div>
+              <button onclick="sendSetpoint('set_temp', setTemp.value, this)">Enviar</button>
+            </div>
 
-          <div class="block">
+            <div class="block">
               <h3>Humedad</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="humStatus"></span>
+              </div>
               <p class="value" id="humDisplay">-- %</p>
               <input id="setHum" type="number" step="0.1" placeholder="Setpoint %">
-              <button onclick="sendSetpoint('set_hum', setHum.value)">Enviar</button>
-          </div>
+              <button onclick="sendSetpoint('set_hum', setHum.value, this)">Enviar</button>
+            </div>
 
-          <div class="block">
+            <div class="block">
               <h3>Presión</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="presStatus"></span>
+              </div>
               <p class="value" id="presDisplay">-- hPa</p>
               <input id="setPres" type="number" step="0.1" placeholder="Setpoint hPa">
-              <button onclick="sendSetpoint('set_pres', setPres.value)">Enviar</button>
-          </div>
+              <button onclick="sendSetpoint('set_pres', setPres.value, this)">Enviar</button>
+            </div>
 
-          <div class="block">
+            <div class="block">
               <h3>Altitud</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="altStatus"></span>
+              </div>
               <p class="value" id="altDisplay">-- m</p>
               <input id="setAlt" type="number" step="0.1" placeholder="Setpoint m">
-              <button onclick="sendSetpoint('set_alt', setAlt.value)">Enviar</button>
+              <button onclick="sendSetpoint('set_alt', setAlt.value, this)">Enviar</button>
+            </div>
           </div>
+        </div>
 
-          <div class="block">
-              <h3>Particulas 0.3 um</h3>
+        <div class="section">
+          <h2 class="section-title">Partículas</h2>
+          <div class="section-blocks">
+            <div class="block">
+              <h3>Partículas 0.3 µm</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="p3Status"></span>
+              </div>
               <p class="value" id="par03Display">-- um</p>
               <input id="setPar03" type="number" step="0.1" placeholder="Setpoint um">
-              <button onclick="sendSetpoint('set_particulas03', setPar03.value)">Enviar</button>
-          </div>
+              <button onclick="sendSetpoint('set_particulas03', setPar03.value, this)">Enviar</button>
+            </div>
 
-          <div class="block">
-              <h3>Particulas 0.5 um</h3>
+            <div class="block">
+              <h3>Partículas 0.5 µm</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="p5Status"></span>
+              </div>
               <p class="value" id="par05Display">-- um</p>
               <input id="setPar05" type="number" step="0.1" placeholder="Setpoint um">
-              <button onclick="sendSetpoint('set_particulas05', setPar05.value)">Enviar</button>
-          </div>
+              <button onclick="sendSetpoint('set_particulas05', setPar05.value, this)">Enviar</button>
+            </div>
 
-          <div class="block">
-              <h3>Particulas 1.0 um</h3>
+            <div class="block">
+              <h3>Partículas 1.0 µm</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="p1Status"></span>
+              </div>
               <p class="value" id="par10Display">-- m</p>
               <input id="setPar10" type="number" step="0.1" placeholder="Setpoint um">
-              <button onclick="sendSetpoint('set_particulas10', setPar10.value)">Enviar</button>
+              <button onclick="sendSetpoint('set_particulas10', setPar10.value, this)">Enviar</button>
+            </div>
           </div>
+        </div>
 
-          <div class="block">
-              <h3>CO2</h3>
+        <div class="section">
+          <h2 class="section-title">Calidad del aire</h2>
+          <div class="section-blocks">
+            <div class="block">
+              <h3>CO₂</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="coStatus"></span>
+              </div>
               <p class="value" id="co2Display">-- m</p>
               <input id="setCO2" type="number" step="0.1" placeholder="Setpoint um">
-              <button onclick="sendSetpoint('set_CO2', setCO2.value)">Enviar</button>
-          </div>
+              <button onclick="sendSetpoint('set_CO2', setCO2.value, this)">Enviar</button>
+            </div>
 
-          <div class="block">
+            <div class="block">
               <h3>TVOC</h3>
+              <div class="status-row center">
+                <span class="status-dot" id="tvocStatus"></span>
+              </div>
               <p class="value" id="tvocDisplay">-- m</p>
               <input id="setTVOC" type="number" step="0.1" placeholder="Setpoint um">
-              <button onclick="sendSetpoint('set_TVOC', setTVOC.value)">Enviar</button>
+              <button onclick="sendSetpoint('set_TVOC', setTVOC.value, this)">Enviar</button>
+            </div>
           </div>
+        </div>
       </div>
     <script src="../script/sidebar.js"></script>
     <script src="../script/dashboard.js"></script>

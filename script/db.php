@@ -1,8 +1,12 @@
 <?php
-    $con = mysqli_connect("127.0.0.1", "root", "", "CorpAG");
+$host = "localhost";
+$user = "root";
+$pass = "";          
+$db   = "CorpAG";
 
-    if ($con == false)
-    {
-        die("Connection error: ". mysqli_connect_error());
-    }
+$con = new mysqli($host, $user, $pass, $db);
+
+if ($con->connect_error) {
+    die("Error de conexión: " . $con->connect_error);
+}
 ?>

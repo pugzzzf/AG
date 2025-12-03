@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <link href="../css/login.css" rel="stylesheet">
-        <title>Corporativo AG</title>
-    </head>
-    <body style="background: linear-gradient(to bottom right, #224a63 0%, #51ae91 100%);">
-        <div class="imgcontainer">
-            <img src="../logo.png" alt="Logo" class="logo" name="logo">
-            <p class="corpname">Corporativo AG</p>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="../css/login.css" rel="stylesheet" />
+    <title>Corporativo AG</title>
+  </head>
+  <body
+    style="
+      background: linear-gradient(to bottom right, #224a63 0%, #51ae91 100%);
+    "
+  >
+    <div class="imgcontainer">
+      <img src="../logo.png" alt="Logo" class="logo" name="logo" />
+      <p class="corpname">Corporativo AG</p>
+    </div>
 
-        <div class="container">
-            <form action="../script/login.php" method="post">
-                <label for="uname" class="label">Username:</label>
-                <input autocomplete="off" autofocus type="text" placeholder="Username" name="uname" required>
+    <div class="container">
+      <form action="../script/login.php" method="post">
+        <label for="uname" class="label">Username:</label>
+        <input
+          autocomplete="off"
+          autofocus
+          type="text"
+          placeholder="Username"
+          name="uname"
+          required
+        />
 
-                <label for="pswd" class="label">Password:</label>
-                <input autocomplete="off" type="password" placeholder="Password" name="pswd" required>
+        <label for="pswd" class="label">Password:</label>
+        <input
+          autocomplete="off"
+          type="password"
+          placeholder="Password"
+          name="pswd"
+          required
+        />
 
-                <p id="error"></p>
-                <script src="../script/login.js"></script>
-                
-                <button type="Submit" name="submit">Login</button>
-            </form>
-        </div>
-    </body>
+        <p id="error"></p>
+        <script src="../script/login.js"></script>
+
+        <button type="Submit" name="submit">Login</button>
+      </form>
+    </div>
+  </body>
 </html>
