@@ -121,6 +121,18 @@ button:hover {
   display: inline-block;
 }
 
+/* COLORES DE ESTADO */
+.status-ok {
+  background-color: #5ac38b;   /* verde */
+}
+
+.status-warn {
+  background-color: #f5c84c;   /* amarillo */
+}
+
+.status-alert {
+  background-color: #e95656;   /* rojo */
+}
 
 /* ------------ RESPONSIVE BEHAVIOR -------------- */
 
