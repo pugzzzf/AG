@@ -1,34 +1,34 @@
 var socket = new WebSocket('ws://localhost:1880/ws');
 
 socket.onmessage = function (event) {
-    var data = JSON.parse(event.data);
+    const data = JSON.parse(event.data);
 
     if (data.temperature !== undefined)
-        document.getElementById('tempDisplay').innerText = data.temperature.toFixed(2) + " °C";
+        updateTemperature(data.temperature);
 
     if (data.humidity !== undefined)
-        document.getElementById('humDisplay').innerText = data.humidity.toFixed(2) + " %";
+        updateHumidity(data.humidity);
 
     if (data.pressure !== undefined)
-        document.getElementById('presDisplay').innerText = data.pressure.toFixed(2) + " hPa";
+        updatePressure(data.pressure);
 
     if (data.altitude !== undefined)
-        document.getElementById('altDisplay').innerText = data.altitude.toFixed(2) + " m";
+        updateAltitude(data.altitude);
 
     if (data.particulas03 !== undefined)
-        document.getElementById('par03Display').innerText = data.particulas03.toFixed(2) + " um";
+        updatePar03(data.particulas03);
 
     if (data.particulas05 !== undefined)
-        document.getElementById('par05Display').innerText = data.particulas05.toFixed(2) + " um";
+        updatePar05(data.particulas05);
 
     if (data.particulas10 !== undefined)
-        document.getElementById('par10Display').innerText = data.particulas10.toFixed(2) + " um";
+        updatePar10(data.particulas10);
 
     if (data.eCO2 !== undefined)
-        document.getElementById('co2Display').innerText = data.eCO2.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
+        updateCO2(data.eCO2);
 
     if (data.tTVOC !== undefined)
-        document.getElementById('tvocDisplay').innerText = data.tTVOC.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
+        updateTVOC(data.tTVOC);
 };
 
 function sendSetpoint(key, value, btn) {
