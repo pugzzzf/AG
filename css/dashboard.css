@@ -1,47 +1,140 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: Arial, sans-serif; /* Keep Arial */
+    background-color: #f1f3f8;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-h1 { 
-    color: #333; 
+h1 {
+    color: #222;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 1fr 260px;   /* left expands, right is thin */
+    grid-template-rows: auto auto;      /* left boxes decide their own heights */
+    grid-template-areas:
+        "big side"
+        "bottom side";
     gap: 20px;
-    padding: 30px;
+    padding: 20px 40px;
 }
+
+
+/* LEFT BOXES */
+
+.big-box {
+    grid-area: big;
+    min-height: 450px;                 /* ← makes it tall */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.bottom-box {
+    grid-area: bottom;
+    min-height: 200px;                 /* ← shorter but wide */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+/* RIGHT BOX */
+
+.side-box {
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;      /* center vertically */
+    align-items: center;          /* center horizontally */
+    gap: 40px;                    /* space between the two blocks */
+    height: 100%;
+}
+
+/* SHARED BOX STYLE */
+
+.big-box, .side-box, .bottom-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+
+/* SENSOR BLOCKS — CENTERED TEXT */
 
 .block {
-    background: white;
-    width: 250px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     text-align: center;
+    width: 250px;
 }
+
+
+/* VALUE TEXT */
 
 .value {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin: 10px 0 15px;
 }
 
+
+
+/* ------------ INPUTS + BUTTONS -------------- */
+
 input {
-    width: 120px;
-    padding: 8px;
-    margin-top: 10px;
+    width: 110px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-right: 8px;
 }
 
 button {
-    padding: 8px 12px;
-    margin-top: 10px;
+    padding: 6px 14px;
+    background-color: #4f73ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #3c5ee3;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;          /* space between bullet and text */
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: gray;
+  display: inline-block;
+}
+
+
+/* ------------ RESPONSIVE BEHAVIOR -------------- */
+
+@media (max-width: 1100px) {
+
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "big"
+            "side"
+            "bottom";
+    }
+
+    .side-box {
+        height: auto;  /* Let it shrink normally on mobile */
+    }
 }
