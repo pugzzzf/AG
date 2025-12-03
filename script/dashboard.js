@@ -1,57 +1,60 @@
 var socket = new WebSocket('ws://localhost:1880/ws');
 
-socket.onmessage = function(event) {
-var data = JSON.parse(event.data);
+socket.onmessage = function (event) {
+    var data = JSON.parse(event.data);
 
-if (data.temperature !== undefined)
-    document.getElementById('tempDisplay').innerText = data.temperature.toFixed(2) + " °C";
+    if (data.temperature !== undefined)
+        document.getElementById('tempDisplay').innerText = data.temperature.toFixed(2) + " °C";
 
-if (data.humidity !== undefined)
-    document.getElementById('humDisplay').innerText = data.humidity.toFixed(2) + " %";
+    if (data.humidity !== undefined)
+        document.getElementById('humDisplay').innerText = data.humidity.toFixed(2) + " %";
 
-if (data.pressure !== undefined)
-    document.getElementById('presDisplay').innerText = data.pressure.toFixed(2) + " hPa";
+    if (data.pressure !== undefined)
+        document.getElementById('presDisplay').innerText = data.pressure.toFixed(2) + " hPa";
 
-if (data.altitude !== undefined)
-    document.getElementById('altDisplay').innerText = data.altitude.toFixed(2) + " m";
+    if (data.altitude !== undefined)
+        document.getElementById('altDisplay').innerText = data.altitude.toFixed(2) + " m";
 
-if (data.particulas03 !== undefined)
-    document.getElementById('par03Display').innerText = data.particulas03.toFixed(2) + " um";
+    if (data.particulas03 !== undefined)
+        document.getElementById('par03Display').innerText = data.particulas03.toFixed(2) + " um";
 
-if (data.particulas05 !== undefined)
-    document.getElementById('par05Display').innerText = data.particulas05.toFixed(2) + " um";
+    if (data.particulas05 !== undefined)
+        document.getElementById('par05Display').innerText = data.particulas05.toFixed(2) + " um";
 
-if (data.particulas10 !== undefined)
-    document.getElementById('par10Display').innerText = data.particulas10.toFixed(2) + " um";
+    if (data.particulas10 !== undefined)
+        document.getElementById('par10Display').innerText = data.particulas10.toFixed(2) + " um";
 
-if (data.eCO2 !== undefined)
-    document.getElementById('co2Display').innerText = data.eCO2.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
+    if (data.eCO2 !== undefined)
+        document.getElementById('co2Display').innerText = data.eCO2.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
 
-if(data.tTVOC !== undefined)
-    document.getElementById('tvocDisplay').innerText = data.tTVOC.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
+    if (data.tTVOC !== undefined)
+        document.getElementById('tvocDisplay').innerText = data.tTVOC.toFixed(2) + " um"; //nose que medida va sorry, le deje la particula
 };
 
-function sendSetpoint(key, value) {
+function sendSetpoint(key, value, btn) {
     if (value === "" || isNaN(value)) {
         alert("Introduce un valor válido");
         return;
     }
 
-    var msg = {};
+    const msg = {};
     msg[key] = parseFloat(value);
 
     socket.send(JSON.stringify(msg));
-    console.log("Enviado:", msg);
 
-    const btn = buttonEl || event.target;
-    btn.disabled = true;
-    btn.classList.add("is-sent");
-    btn.innerText = "✓ Enviado";
+    // animación mínima 
+    btn.style.transition = "background-color .25s ease, transform .2s ease";
+    btn.style.backgroundColor = "#4caf50";
+    btn.style.color = "white";
+    btn.style.transform = "scale(1.03)";
+    btn.innerText = "✓";
+
     setTimeout(() => {
-        btn.classList.remove("is-sent");
+        btn.style.backgroundColor = "";
+        btn.style.color = "";
+        btn.style.transform = "";
         btn.innerText = "Enviar";
-        btn.disabled = false;
-    }, 1500);
+    }, 900);
 }
 
 function setStatusDot(id, level) {
