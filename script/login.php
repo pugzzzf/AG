@@ -9,10 +9,10 @@
         $user = stripslashes($user);
         $password = stripslashes($password);
 
-        $user = mysqli_real_escape_string($con, $user);
-        $password = mysqli_real_escape_string($con, $password);
+        $user = mysqli_real_escape_string($conn, $user);
+        $password = mysqli_real_escape_string($conn, $password);
 
-        $stmt = $con->prepare("SELECT * FROM login WHERE uname = ? AND pswd = ?");
+        $stmt = $conn->prepare("SELECT * FROM login WHERE uname = ? AND pswd = ?");
         $stmt->bind_param("ss", $user, $password);
         $stmt->execute();
 
