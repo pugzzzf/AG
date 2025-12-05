@@ -1,8 +1,12 @@
 <?php
-    $con = mysqli_connect("127.0.0.1", "root", "", "CorpAG");
+    $host = "127.0.0.1";
+    $user = "root";
+    $pass = "";
+    $db   = "CorpAG";
 
-    if ($con == false)
-    {
-        die("Connection error: ". mysqli_connect_error());
+    $conn = new mysqli($host, $user, $pass, $db);
+    if ($conn->connect_error) {
+        echo json_encode(["error" => "DB connection failed"]);
+        exit;
     }
 ?>

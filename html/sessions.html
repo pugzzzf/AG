@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sessions</title>
+
+    <link href="../css/sidebar.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../css/sessions.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="agsidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#" class="cur">Sessions</a>
+            <a href="login.html">Log Out</a>
+            <div class="sidebar-footer">
+                <img src="../logo.png" alt="AG Logo">
+            </div>
+        </div>
+        <div id="main">
+            <button class="openbtn" onclick="openNav()">☰</button>
+            <h1>Sessions</h1>
+
+            <div class="sessions-container" id="sessions"></div>
+        </div>
+
+        <script src="../script/sidebar.js"></script>
+
+        <script>
+            async function loadSessions() {
+                const resp = await fetch("../script/session.php");
+                const data = await resp.json();
+
+                const container = document.getElementById("sessions");
+
+                data.forEach(s => {
+                    const card = document.createElement("div");
+                    card.className = "session-card";
+
+                    card.innerHTML = `
+                        <div class="session-info">
+                            <h2>${s.day}</h2>
+                            <p>${s.count} registros</p>
+                        </div>
+                        <button class="view-btn" onclick="location.href='graph.html?date=${s.day}'">
+                            Details
+                        </button>
+                    `;
+
+                    container.appendChild(card);
+                });
+            }
+
+            loadSessions();
+        </script>
+    </body>
+</html>

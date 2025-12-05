@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Session Graph</title>
+
+        <!-- Existing fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Lato:wght@400&display=swap" rel="stylesheet" >
+
+        <!-- Your CSS files -->
+        <link href="../css/sidebar.css" rel="stylesheet" >
+        <link href="../css/sessions.css" rel="stylesheet" >
+        <link href="../css/dashboard.css" rel="stylesheet">
+        <link href="../css/graph.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+    <body>
+        <div id="main">
+            <div class="sessions-container">
+                <!-- Graph card -->
+                <div class="session-card" style="flex-direction: column; align-items: flex-start; gap: 20px; width: 100%;">
+                    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                        <h2 id="sessionTitle" style="margin:0; font-size:26px;">Session Graph</h2>
+                        <button class="view-btn" onclick="location.href='sessions.html'">
+                        ← Sessions
+                    </button>
+                </div>
+                <canvas id="chart" style="width: 100%; max-height: 480px;"></canvas>
+            </div>
+        </div>
+    </div>    
+    <script>
+    function getQueryParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    async function loadGraph() {
+        const date = getQueryParam("date");
+        document.getElementById("sessionTitle").innerText =
+            "Session: " + date;
+
+        const resp = await fetch(`../script/graph.php?from=${date} 00:00:00&to=${date} 23:59:59`);
+        const data = await resp.json();
+
+        console.log("PARSED DATA:", data);
+
+
+        const labels = data.map(r => r.fecha);
+        const temps  = data.map(r => Number(r.temperatura));
+        const hum    = data.map(r => Number(r.humedad));
+        const pres   = data.map(r => Number(r.presion));
+
+        console.log("Sample row:", data[0]);
+
+        new Chart(document.getElementById("chart"), {
+            type: "line",
+            data: {
+                labels,
+                datasets: [
+                    { label: "Temperature (°C)", data: temps, borderColor: "red" },
+                    { label: "Humidity (%)",    data: hum,  borderColor: "blue" },
+                    { label: "Pressure (hPa)",  data: pres, borderColor: "green" }
+                ]
+            }
+        });
+    }
+
+    loadGraph();
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,42 @@
+.sessions-container {
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.session-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.session-info h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+}
+
+.session-info p {
+    margin: 4px 0 0;
+    color: #555;
+}
+
+.view-btn {
+    padding: 10px 20px;
+    background-color: #4f73ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.view-btn:hover {
+    background-color: #3c5ee3;
+}
